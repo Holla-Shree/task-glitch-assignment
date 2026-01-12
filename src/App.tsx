@@ -117,10 +117,13 @@ function AppContent() {
           )}
           {!loading && !error && (
             <TaskTable
-              tasks={filtered}
-              onAdd={handleAdd}
-              onUpdate={handleUpdate}
-              onDelete={handleDelete}
+              tasks={derivedSorted}
+              onAdd={(payload: Omit<Task, 'id' | 'createdAt' | 'completedAt'>) => {
+                addTask(payload);
+              }}
+
+              onUpdate={updateTask}
+              onDelete={deleteTask}
             />
           )}
           {!loading && !error && <ChartsDashboard tasks={filtered} />}
